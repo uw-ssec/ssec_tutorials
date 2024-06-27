@@ -3,23 +3,28 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ssec_project"
+name = "ssec-tutorials"
 dynamic = ["version"]
-description = "Python project repository template for developing python package."
+description = "UW SSEC Tutorials Utility Library"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering",
     "Topic :: Software Development :: Build Tools",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = ["requests", "pandas"]
+dependencies = [
+    "torch~=2.1.2",
+    "langchain~=0.2.3",
+    "jsonlines>=4.0.0"
+]
 
 [project.optional-dependencies]
 dev = [
@@ -38,22 +43,21 @@ docs = [
     "jupyter-book",
     "numpydoc",
 ]
-all = ["ssec_project[dev,docs]"]
+all = ["ssec-tutorials[dev,docs]"]
 
 [project.license]
 file = "LICENSE"
 
 [project.urls]
-Homepage = "https://github.com/uw-ssec/python-project-template"
-Documentation = "https://ssec-python-project-template.readthedocs.io"
-Repository = "https://github.com/uw-ssec/python-project-template.git"
-Issues = "https://github.com/uw-ssec/python-project-template/issues"
+Homepage = "https://github.com/uw-ssec/ssec_tutorials"
+Repository = "https://github.com/uw-ssec/ssec_tutorials.git"
+Issues = "https://github.com/uw-ssec/ssec_tutorials/issues"
 
 [tool.hatch.version]
 source = "vcs"
 
 [tool.hatch.build.hooks.vcs]
-version-file = "src/ssec_project/version.py"
+version-file = "src/ssec_tutorials/version.py"
 
 [tool.hatch.version.raw-options]
 local_scheme = "no-local-version"
@@ -80,7 +84,7 @@ disallow_untyped_defs = false
 disallow_incomplete_defs = false
 
 [[tool.mypy.overrides]]
-module = "ssec_project.*"
+module = "ssec_tutorials.*"
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
 
