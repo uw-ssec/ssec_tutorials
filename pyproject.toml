@@ -121,6 +121,7 @@ ignore = [
     "PLR09",   # Too many <...>
     "PLR2004", # Magic value used in comparison
     "ISC001",  # Conflicts with formatter
+    "T201",    # Print found
 ]
 isort.required-imports = ["from __future__ import annotations"]
 # Uncomment if using a _compat.typing backport
@@ -129,3 +130,8 @@ isort.required-imports = ["from __future__ import annotations"]
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
 "noxfile.py" = ["T20"]
+
+[tool.repo-review]
+ignore = [
+  "PC140"  # Ignore use of mypy
+]

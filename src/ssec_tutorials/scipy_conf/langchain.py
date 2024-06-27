@@ -4,7 +4,10 @@ This module provides functions for saving and loading LangChain documents to/fro
 https://gist.github.com/dcbark01/59b8ad9f12f4cbecc791c3618bdde0b0
 """
 
+from __future__ import annotations
+
 import typing as t
+
 import jsonlines
 from langchain.schema import Document
 

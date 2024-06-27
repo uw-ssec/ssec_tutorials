@@ -2,6 +2,8 @@
 This module contains functions for parsing llama cpp responses.
 """
 
+from __future__ import annotations
+
 
 def parse_chat_completion_response(generated_response: dict) -> str:
     """

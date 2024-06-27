@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 import os
 from pathlib import Path
 from urllib.request import urlretrieve
 from zipfile import ZipFile
+
 import requests
 from langchain.schema import Document
 
@@ -14,9 +17,7 @@ OLMO_MODEL_FILE = os.environ.get("OLMO_MODEL_FILE", "OLMo-7B-Instruct-Q4_K_M.ggu
 OLMO_MODEL = TUTORIAL_CACHE / OLMO_MODEL_FILE
 
 # Set the URL for tutorials data assets
-TUTORIALS_DATA_URL = (
-    "https://github.com/uw-ssec/tutorials-data/releases/download/scipy-2024/"
-)
+TUTORIALS_DATA_URL = "https://github.com/uw-ssec/tutorials-data/releases/download/scipy-2024/"
 
 # Set the default file name for the astro-ph arXiv abstracts
 ASTROPH_ARXIV_ABSTRACTS_FILE = os.environ.get(
@@ -65,17 +66,17 @@ def download_olmo_model(model_file: str | None = None, force=False) -> Path:
             olmo_model = OLMO_MODEL
         else:
             olmo_model = TUTORIAL_CACHE / model_file
-        olmo_model_url = f"https://huggingface.co/ssec-uw/OLMo-7B-Instruct-GGUF/resolve/main/{model_file}"
+        olmo_model_url = (
+            f"https://huggingface.co/ssec-uw/OLMo-7B-Instruct-GGUF/resolve/main/{model_file}"
+        )
         urlretrieve(olmo_model_url, olmo_model)
         return olmo_model
-    else:
-        print(f"Model already exists at {OLMO_MODEL}")
-        return OLMO_MODEL
+
+    print(f"Model already exists at {OLMO_MODEL}")
+    return OLMO_MODEL
 
 
-def download_astroph_arxiv_abstracts(
-    abstracts_file: str | None = None, force=False
-) -> Path:
+def download_astroph_arxiv_abstracts(abstracts_file: str | None = None, force=False) -> Path:
     """Download the astro-ph arXiv abstracts from the tutorials data repository.
 
     Parameters
@@ -100,14 +101,12 @@ def download_astroph_arxiv_abstracts(
         astroph_arxiv_abstracts_url = f"{TUTORIALS_DATA_URL}{abstracts_file}"
         urlretrieve(astroph_arxiv_abstracts_url, astroph_arxiv_abstracts)
         return astroph_arxiv_abstracts
-    else:
-        print(f"astro-ph arXiv abstracts already exist at {ASTROPH_ARXIV_ABSTRACTS}")
-        return ASTROPH_ARXIV_ABSTRACTS
+
+    print(f"astro-ph arXiv abstracts already exist at {ASTROPH_ARXIV_ABSTRACTS}")
+    return ASTROPH_ARXIV_ABSTRACTS
 
 
-def download_astropy_github_documents(
-    github_file: str | None = None, force=False
-) -> Path:
+def download_astropy_github_documents(github_file: str | None = None, force=False) -> Path:
     """
     Downloads Astropy GitHub LandChain Documents from the specified file or the default file if not provided.
 
@@ -132,9 +131,9 @@ def download_astropy_github_documents(
         astropy_github_url = f"{TUTORIALS_DATA_URL}{github_file}"
         urlretrieve(astropy_github_url, astropy_github)
         return astropy_github
-    else:
-        print(f"Astropy github files already exist at {ASTROPY_GITHUB}")
-        return ASTROPY_GITHUB
+
+    print(f"Astropy github files already exist at {ASTROPY_GITHUB}")
+    return ASTROPY_GITHUB
 
 
 def download_qdrant_data(qdrant_file: str | None = None, force=False) -> Path:
@@ -166,13 +165,13 @@ def download_qdrant_data(qdrant_file: str | None = None, force=False) -> Path:
         with ZipFile(qdrant_zip, "r") as zip_ref:
             zip_ref.extractall(TUTORIAL_CACHE)
 
-        if os.path.exists(qdrant_zip):
-            os.remove(qdrant_zip)
+        if qdrant_zip.exists():
+            qdrant_zip.unlink()
 
         return TUTORIAL_CACHE / qdrant_file.replace(".zip", "")
-    else:
-        print(f"Qdrant data already exists at {QDRANT_PATH}")
-        return QDRANT_PATH
+
+    print(f"Qdrant data already exists at {QDRANT_PATH}")
+    return QDRANT_PATH
 
 
 def fetch_and_process_github_rst_files(
@@ -195,7 +194,9 @@ def fetch_and_process_github_rst_files(
     Raises:
         requests.exceptions.HTTPError: If the HTTP request to the GitHub API fails.
     """
-    base_url = f"https://api.github.com/repos/{github_repo}/contents/{docs_path}?ref={github_branch}"
+    base_url = (
+        f"https://api.github.com/repos/{github_repo}/contents/{docs_path}?ref={github_branch}"
+    )
     headers = {
         "Accept": "application/vnd.github.v3+json",
         "Authorization": f"token {github_personal_access_token}",
