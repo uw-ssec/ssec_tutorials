@@ -10,7 +10,8 @@ from langchain.schema import Document
 
 HOME_DIR = Path.home()
 CACHE_DIR = HOME_DIR / ".cache"
-TUTORIAL_CACHE = CACHE_DIR / "ssec_tutorials"
+DEFAULT_TUTORIAL_CACHE = CACHE_DIR / "ssec_tutorials"
+TUTORIAL_CACHE = Path(os.environ.get("SSEC_TUTORIALS_CACHE", DEFAULT_TUTORIAL_CACHE))
 TUTORIAL_CACHE.mkdir(parents=True, exist_ok=True)
 
 OLMO_MODEL_FILE = os.environ.get("OLMO_MODEL_FILE", "OLMo-7B-Instruct-Q4_K_M.gguf")
