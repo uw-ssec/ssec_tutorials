@@ -9,9 +9,15 @@ import requests
 from langchain.schema import Document
 
 HOME_DIR = Path.home()
-CACHE_DIR = HOME_DIR / ".cache"
+# Nebari shared directory
+# default to this
+CACHE_DIR = HOME_DIR / "shared" / "scipy" / "gen-ai-copilot-with-rag"
+if not CACHE_DIR.exists():
+    # This is for local development
+    CACHE_DIR = HOME_DIR / ".cache"
+
 DEFAULT_TUTORIAL_CACHE = CACHE_DIR / "ssec_tutorials"
-TUTORIAL_CACHE = Path(os.environ.get("SSEC_TUTORIALS_CACHE", DEFAULT_TUTORIAL_CACHE))
+TUTORIAL_CACHE = Path(os.environ.get("SSEC_TUTORIALS_CACHE", DEFAULT_TUTORIAL_CACHE)).expanduser()
 TUTORIAL_CACHE.mkdir(parents=True, exist_ok=True)
 
 OLMO_MODEL_FILE = os.environ.get("OLMO_MODEL_FILE", "OLMo-7B-Instruct-Q4_K_M.gguf")
