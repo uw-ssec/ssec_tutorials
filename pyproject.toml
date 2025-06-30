@@ -20,8 +20,8 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-    "torch~=2.1.2",
-    "langchain~=0.2.3",
+    "torch~=2.7",
+    "langchain~=0.3.26",
     "jsonlines>=4.0.0"
 ]
 
@@ -132,5 +132,5 @@ isort.required-imports = ["from __future__ import annotations"]
 
 [tool.repo-review]
 ignore = [
-  "PC140"  # Ignore use of mypy
+  "PC140", # Ignore use of mypy
 ]
