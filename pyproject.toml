@@ -19,11 +19,7 @@ classifiers = [
     "Topic :: Software Development :: Build Tools",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = [
-    "torch~=2.7",
-    "langchain~=0.3.26",
-    "jsonlines>=4.0.0"
-]
+dependencies = ["torch~=2.7", "langchain~=0.3.26", "jsonlines>=4.0.0"]
 
 [project.optional-dependencies]
 dev = [
@@ -69,7 +65,7 @@ minversion = "6.0"
 addopts = ["-vvv", "-ra", "--showlocals", "--strict-markers", "--strict-config"]
 xfail_strict = false
 filterwarnings = ["error"]
-log_cli_level = "info"
+log_cli_level = "INFO"
 testpaths = ["tests"]
 
 [tool.mypy]
@@ -132,5 +128,5 @@ isort.required-imports = ["from __future__ import annotations"]
 
 [tool.repo-review]
 ignore = [
-  "PC140", # Ignore use of mypy
+    "PC140", # Ignore use of mypy
 ]
